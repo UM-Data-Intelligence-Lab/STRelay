@@ -5,7 +5,7 @@ We upload the STRelay with Graph-Flashback (the best-performing base model) for 
 
 # DATA and Pretrained Graphs
 
-The datasets are pretrained graphs available here: 
+The datasets are pretrained graphs available here: https://drive.google.com/drive/folders/1WJOfoMPUj3nVJOqJKwPtDS-N8G8-pI6s?usp=drive_link
 
 # Requirements
 ```
