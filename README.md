@@ -7,7 +7,7 @@ We upload the STRelay with Graph-Flashback (the best-performing base model) for 
 
 The datasets are pretrained graphs available here: https://drive.google.com/drive/folders/1WJOfoMPUj3nVJOqJKwPtDS-N8G8-pI6s?usp=drive_link
 
-Please download from the link above, and place the two folders ``data'' and ``POI_graph'' in the current directory.
+Please download from the link above, and place the two folders ``data`` and ``POI_graph`` in the current directory.
 
 # Requirements
 ```
