@@ -3,6 +3,10 @@ STRelay: A Universal Spatio-Temporal Relaying Framework for Location Prediction 
 
 We upload the STRelay with Graph-Flashback (the best-performing base model) for your reference. 
 
+# DATA and Pretrained Graphs
+
+The datasets are pretrained graphs available here: 
+
 # Requirements
 ```
 python: 3.8
