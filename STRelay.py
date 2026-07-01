@@ -92,7 +92,7 @@ class Spatial(nn.Module):
 
         time_feature = temporal_embedded.transpose(0, 1)
         
-        poi_feature = self.poi_embedding(poi_ids).view(batch_size, sequence_length, -1)  # [batch, seq_len, embed_dim]
+        poi_feature = self.poi_embedding(poi_ids).permute(1, 0, 2).contiguous()  # [batch, seq_len, embed_dim]
         head_outputs = []
 
         query = torch.cat([user_feature, time_feature, poi_feature], dim=-1)
