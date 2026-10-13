@@ -34,7 +34,13 @@ class Setting:
         self.STRelay = args.STRelay == 'True'  # True or False
         self.temporal_intervals = args.temporal_intervals  # 24
         self.spatial_intervals = args.spatial_intervals  #
-        self.head = args.head 
+        self.head = args.head
+        if self.hidden_dim % self.head != 0:
+            parser.error('--hidden-dim must be divisible by --head')
+
+        self.lambda_temporal = args.lambda_temporal
+        self.lambda_spatial = args.lambda_spatial
+        self.seed = args.seed
 
         # data management
         self.dataset = args.dataset
@@ -78,7 +84,10 @@ class Setting:
         parser.add_argument('--STRelay', type=str, default='True', choices=['True', 'False'], help='Use STRelay or not (True/False)')
         parser.add_argument('--temporal_intervals', type=int, default=24, help='the number of temporal intervals')
         parser.add_argument('--spatial_intervals', type=int, default=30, help='the number of spatial intervals')
-        parser.add_argument('--head', type=float, default=2, help='attention head')
+        parser.add_argument('--head', type=int, default=2, help='number of attention heads')
+        parser.add_argument('--lambda_temporal', type=float, default=0.5, help='weight of the future temporal interval loss')
+        parser.add_argument('--lambda_spatial', type=float, default=0.5, help='weight of the future spatial interval loss')
+        parser.add_argument('--seed', type=int, default=0, help='random seed')
         # data management
         parser.add_argument('--dataset', default='Istanbul.txt', type=str,
                             help='the dataset under ./data/<dataset.txt> to load')
@@ -140,5 +149,8 @@ class Setting:
             f"  Use STRelay: {self.STRelay}",
             f"  Temporal intervals Number: {self.temporal_intervals}",
             f"  Sptial intervals Number: {self.spatial_intervals}",
+            f"  Lambda Future Temporal: {self.lambda_temporal}",
+            f"  Lambda Future Spatial: {self.lambda_spatial}",
+            f"  Seed: {self.seed}",
         ]
         return "\n".join(settings)
