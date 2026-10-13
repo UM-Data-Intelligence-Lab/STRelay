@@ -73,10 +73,10 @@ class FlashbackTrainer():
         l = self.cross_entropy_loss(out, y)
         if self.config.STRelay:
             t_linear = t_linear.view(-1, self.config.temporal_intervals + 1)
-            l_t = self.cross_entropy_loss(t_linear, y_timeintervals.view(-1)) * 0.5
+            l_t = self.cross_entropy_loss(t_linear, y_timeintervals.view(-1)) * self.config.lambda_temporal
             l += l_t
 
             d_linear = d_linear.view(-1, self.config.spatial_intervals + 1)
-            l_d = self.cross_entropy_loss(d_linear, y_distances.view(-1)) * 0.5
+            l_d = self.cross_entropy_loss(d_linear, y_distances.view(-1)) * self.config.lambda_spatial
             l += l_d           
         return l
