@@ -30,7 +30,9 @@ class Temporal(nn.Module):
         hour_x = t_slot.permute(1, 0)  # (batch_size, seq_len)
 
         timeslot_embedded = self.timeslot_embedding(torch.arange(end=168, dtype=torch.int, device=t_slot.device))
-        timeinterval_embedded = self.timeinterval_embedding(torch.arange(end=self.temporal_intervals, dtype=torch.int, device=t_slot.device))
+        timeinterval_embedded = self.timeinterval_embedding(
+            torch.arange(end=self.temporal_intervals + 1, dtype=torch.long, device=t_slot.device)
+        )
 
         batch_size, sequence_length = hour_x.shape
 
@@ -83,7 +85,9 @@ class Spatial(nn.Module):
     def forward(self, poi_ids, temporal_embedded, active_user):
         user_x = active_user
 
-        disinterval_embedded = self.spatial_interval_embedding(torch.arange(end=self.spatial_intervals, dtype=torch.int, device=poi_ids.device))
+        disinterval_embedded = self.spatial_interval_embedding(
+            torch.arange(end=self.spatial_intervals + 1, dtype=torch.long, device=poi_ids.device)
+        )
 
         sequence_length, batch_size = poi_ids.shape
 
