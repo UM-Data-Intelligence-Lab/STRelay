@@ -2,6 +2,7 @@ import torch
 from torch.utils.data import DataLoader
 import numpy as np
 import time, os
+import random
 import pickle
 from setting import Setting
 from trainer import FlashbackTrainer
@@ -16,6 +17,13 @@ from scipy.sparse import coo_matrix
 # parse settings
 setting = Setting()
 setting.parse()
+
+random.seed(setting.seed)
+np.random.seed(setting.seed)
+torch.manual_seed(setting.seed)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed_all(setting.seed)
+
 dir_name = os.path.dirname(setting.log_file)
 if not os.path.exists(dir_name):
     os.mkdir(dir_name)
